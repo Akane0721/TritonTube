@@ -70,6 +70,13 @@ func main() {
 			return
 		}
 		metadataService = sqliteMetadataService
+	case "etcd":
+		etcdMetadataService, err := web.NewEtcdVideoMetadataService(metadataServiceOptions)
+		if err != nil {
+			fmt.Printf("Failed to start etcd metadata service: %v\n", err)
+			return
+		}
+		metadataService = etcdMetadataService
 	default:
 		fmt.Println("Unsupported metadata service type: ", metadataServiceType)
 		return
