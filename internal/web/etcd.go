@@ -6,6 +6,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"strings"
 	"time"
 
 	clientv3 "go.etcd.io/etcd/client/v3"
@@ -19,8 +20,9 @@ type EtcdVideoMetadataService struct {
 var _ VideoMetadataService = (*EtcdVideoMetadataService)(nil)
 
 func NewEtcdVideoMetadataService(endpoints string) (*EtcdVideoMetadataService, error) {
+	endpointList := strings.Split(endpoints, ",")
 	cli, err := clientv3.New(clientv3.Config{
-		Endpoints:   []string{endpoints},
+		Endpoints:   endpointList,
 		DialTimeout: 5 * time.Second,
 	})
 	if err != nil {
