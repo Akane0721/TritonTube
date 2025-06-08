@@ -30,7 +30,7 @@ func printUsage() {
 func main() {
 	// Define flags
 	port := flag.Int("port", 8080, "Port number for the web server")
-	host := flag.String("host", "localhost", "Host address for the web server")
+	host := flag.String("host", "0.0.0.0", "Host address for the web server")
 
 	// Set custom usage message
 	flag.Usage = printUsage
