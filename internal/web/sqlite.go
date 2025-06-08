@@ -83,7 +83,7 @@ func (s *SQLiteVideoMetadataService) Read(videoId string) (*VideoMetadata, error
 	var id string
 	var uploadedAtStr string
 	if err := row.Scan(&id, &uploadedAtStr); err != nil {
-		return nil, fmt.Errorf("scan metadata failed: %v", err)
+		return nil, fmt.Errorf("%v not found: %v", videoId, err)
 	}
 	ts, err := time.Parse(time.RFC3339, uploadedAtStr)
 	if err != nil {

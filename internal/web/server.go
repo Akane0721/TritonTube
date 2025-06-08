@@ -79,7 +79,7 @@ func (s *server) handleUpload(w http.ResponseWriter, r *http.Request) {
 	if _, err := s.metadataService.Read(videoId); err == nil {
 		http.Error(w, "Video ID already exists", http.StatusConflict)
 		return
-	} else if !strings.Contains(err.Error(), "no rows in result set") {
+	} else if !strings.Contains(err.Error(), "not found") {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
