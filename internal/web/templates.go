@@ -68,8 +68,8 @@ const indexHTML = `
         :key="v.Id"
         class="list-group-item d-flex justify-content-between align-items-center"
       >
-        <a :href="'/videos/' + v.Id" class="link">{{ v.Id }}</a>
-        <small class="text-muted">{{ "{{ formatTime(v.UploadedAt) }}" }}</small>
+        <a :href="'/videos/' + v.Id" class="link">{{"{{ v.Id }}"}}</a>
+        <small class="text-muted">{{"{{ formatTime(v.UploadedAt) }}"}}</small>
       </li>
       <li v-if="videos.length === 0" class="list-group-item">
         No videos uploaded yet.
@@ -123,7 +123,7 @@ const videoHTML = `
 <html>
 <head>
   <meta charset="UTF-8" />
-  <title>{{.Id}} - TritonTube</title>
+  <title>{{"{{ .Id }}"}} - TritonTube</title>
   <link
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
@@ -132,15 +132,15 @@ const videoHTML = `
 </head>
 <body class="bg-dark text-light">
   <div class="container py-5">
-    <h1 class="text-warning">{{.Id}}</h1>
-    <p>Uploaded at: {{ formatTime .UploadedAt }}</p>
+    <h1 class="text-warning">{{"{{ .Id }}"}}</h1>
+    <p>Uploaded at: {{"{{ formatTime .UploadedAt }}"}}</p>
 
     <div class="ratio ratio-16x9 mb-3">
       <video id="dashPlayer" controls class="rounded bg-black"></video>
     </div>
 
     <script>
-      var url = "/content/{{.Id}}/manifest.mpd";
+      var url = "/content/{{"{{ .Id }}"}}/manifest.mpd";
       var player = dashjs.MediaPlayer().create();
       player.initialize(document.querySelector("#dashPlayer"), url, false);
     </script>
