@@ -68,7 +68,7 @@ const indexHTML = `
         class="list-group-item d-flex justify-content-between align-items-center"
       >
         <a :href="'/videos/' + v.Id" class="link">{{"{{ v.Id }}"}}</a>
-        <small class="text-muted">{{"{{ .v.UploadedAt }}"}}</small>
+        <small class="text-muted">{{"{{ v.UploadedAt }}"}}</small>
       </li>
       <li v-if="videos.length === 0" class="list-group-item">
         No videos uploaded yet.
