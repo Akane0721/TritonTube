@@ -3,13 +3,12 @@ package web
 import (
 	"encoding/json"
 	"html/template"
-	"time"
 )
 
 var funcMap = template.FuncMap{
-	"formatTime": func(t time.Time) string {
-		return t.Format("2006-01-02 15:04:05")
-	},
+	// "formatTime": func(t time.Time) string {
+	// 	return t.Format("2006-01-02 15:04:05")
+	// },
 	"toJSON": func(v interface{}) (template.JS, error) {
 		b, err := json.Marshal(v)
 		return template.JS(b), err
@@ -69,7 +68,7 @@ const indexHTML = `
         class="list-group-item d-flex justify-content-between align-items-center"
       >
         <a :href="'/videos/' + v.Id" class="link">{{"{{ v.Id }}"}}</a>
-        <small class="text-muted">{{"{{ formatTime(v.UploadedAt) }}"}}</small>
+        <small class="text-muted">{{"{{ .v.UploadedAt }}"}}</small>
       </li>
       <li v-if="videos.length === 0" class="list-group-item">
         No videos uploaded yet.
@@ -133,7 +132,7 @@ const videoHTML = `
 <body class="bg-dark text-light">
   <div class="container py-5">
     <h1 class="text-warning">{{"{{ .Id }}"}}</h1>
-    <p>Uploaded at: {{"{{ formatTime .UploadedAt }}"}}</p>
+    <p>Uploaded at: {{"{{ .UploadedAt }}"}}</p>
 
     <div class="ratio ratio-16x9 mb-3">
       <video id="dashPlayer" controls class="rounded bg-black"></video>
