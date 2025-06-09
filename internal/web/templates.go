@@ -39,12 +39,12 @@ const indexHTML = `
   <button class="btn btn-success mb-3" :disabled="!file" @click="upload">Upload</button>
 
   <!-- 进度条 -->
-  <div v-if="progress>=0">
-    <div class="progress mb-4">
-      <div class="progress-bar" role="progressbar" :style="{ width: progress + '%' }">
-        {{ progress }}%
-      </div>
-    </div>
+  <div class="progress mb-4" v-if="progress>=0">
+  <div class="progress-bar"
+	  role="progressbar"
+	  :style="{ width: progress + '%' }"
+	  v-text="progress + '%'">
+  </div>
   </div>
 
   <!-- 视频列表 -->
