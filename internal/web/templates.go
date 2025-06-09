@@ -6,9 +6,6 @@ import (
 )
 
 var funcMap = template.FuncMap{
-	// "formatTime": func(t time.Time) string {
-	// 	return t.Format("2006-01-02 15:04:05")
-	// },
 	"toJSON": func(v interface{}) (template.JS, error) {
 		b, err := json.Marshal(v)
 		return template.JS(b), err
@@ -132,7 +129,7 @@ const videoHTML = `
 <body class="bg-dark text-light">
   <div class="container py-5">
     <h1 class="text-warning">{{ .Id }}</h1>
-    <p>Uploaded at: {{"{{ .UploadedAt }}"}}</p>
+    <p>Uploaded at: {{ .UploadedAt }}</p>
 
     <div class="ratio ratio-16x9 mb-3">
       <video id="dashPlayer" controls class="rounded bg-black"></video>
