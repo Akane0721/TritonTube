@@ -122,7 +122,7 @@ const videoHTML = `
 <html>
 <head>
   <meta charset="UTF-8" />
-  <title>{{"{{ .Id }}"}} - TritonTube</title>
+  <title>{{ .Id }} - TritonTube</title>
   <link
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
@@ -131,7 +131,7 @@ const videoHTML = `
 </head>
 <body class="bg-dark text-light">
   <div class="container py-5">
-    <h1 class="text-warning">{{"{{ .Id }}"}}</h1>
+    <h1 class="text-warning">{{ .Id }}</h1>
     <p>Uploaded at: {{"{{ .UploadedAt }}"}}</p>
 
     <div class="ratio ratio-16x9 mb-3">
@@ -139,7 +139,7 @@ const videoHTML = `
     </div>
 
     <script>
-      var url = "/content/{{"{{ .Id }}"}}/manifest.mpd";
+      var url = "/content/{{ .Id }}/manifest.mpd";
       var player = dashjs.MediaPlayer().create();
       player.initialize(document.querySelector("#dashPlayer"), url, false);
     </script>
