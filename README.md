@@ -15,8 +15,8 @@ A distributed video‐streaming platform with adaptive MPEG-DASH playback, plugg
   - Admin gRPC → dynamic node add/remove + zero-downtime migrations  
 
 - **Metadata**  
-  - SQLiteVideoMetadataService: **SQLite** (local) or **etcd** (multiple nodes Raft) for high availability  
-  - EtcdVideoMetadataService: **etcd** clientv3 for Go → high availability, strong consistency
+  - SQLiteVideoMetadataService: local **SQLite** database for metadata storage  
+  - EtcdVideoMetadataService: **etcd** (multiple nodes Raft) clientv3 for Go → high availability, strong consistency
 
 - **Content Delivery**  
   - FSVideoContentService: **Local FS** or **AWS EFS** shared file system (mount `/mnt/efs/storage`)  
@@ -32,7 +32,7 @@ A distributed video‐streaming platform with adaptive MPEG-DASH playback, plugg
 ### Prerequisites
 
 - Go 1.24+  
-- etcd cluster (or single‐node) running on ports `2379` (client) `2380` (peer)  
+- etcd cluster (or single‐node) running on ports `2379` (client),  `2380` (peer)  
 - (Optional) AWS EFS mount at `/mnt/efs/storage`
 - `ffmpeg` installed
 
@@ -60,7 +60,7 @@ sudo chown $USER:$USER /mnt/efs/storage
 ```go
 go run cmd/storage/main.go \
   -host localhost -port <port number> \
-  /mnt/efs-videos
+  /mnt/efs/storage
 
 ...
 
@@ -71,8 +71,8 @@ Repeat on other machines with different ports.
 ```go
 go run cmd/web/main.go \
   -port 8080 \
-  sqlite ./metadata.db \ or etcd "<IP1>:2379,<IP2>:2379, <IP3>:2379"
-  fs /mnt/efs/storage or nw "localhost:8081,localhost:8090,localhost:8091, localhost:8092"
+  sqlite ./metadata.db \ or etcd "<IP1>:2379,<IP2>:2379, <IP3>:2379, ..."
+  fs /mnt/efs/storage or nw "localhost:8081,localhost:8090,localhost:8091, localhost:8092, ..."
 ```
 
 ###  5. (For NetworkVideoContentService, Optional) Use Admin CLI
