@@ -46,11 +46,6 @@ func (s *server) Start(lis net.Listener) error {
 	return http.Serve(lis, s.mux)
 }
 
-// var (
-// 	indexTmpl = template.Must(template.New("index").Parse(indexHTML))
-// 	videoTmpl = template.Must(template.New("video").Parse(videoHTML))
-// )
-
 var (
 	indexTmpl = template.Must(template.New("index").Funcs(funcMap).Parse(indexHTML))
 	videoTmpl = template.Must(template.New("video").Funcs(funcMap).Parse(videoHTML))
